@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Credit - Loan &amp; Credit Company HTML Template</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+
+var app = angular.module('myApp1', []);
+app.controller('FormController1', function($scope,$http) {
+
+
+$scope.eventstream = function() {
+
+
+$http({
+        url: 'http://localhost:8087/eventStream',
+        method: "POST"
+
+    })
+    .then(function(response) {
+
+           $scope.events = JSON.parse(response.data);
+
+    },
+    function(response) { // optional
+            // failed
+            console.log (JSON.stringify (response, null, 2));
+
+    });
+}
+    $scope.offerstream = function() {
+
+
+$http({
+        url: 'http://localhost:8087/offerStream',
+        method: "POST"
+
+    })
+    .then(function(response) {
+
+           $scope.off = JSON.parse(response.data);
+
+    },
+    function(response) { // optional
+            // failed
+            console.log (JSON.stringify (response, null, 2));
+
+    });
+
+
+
+}
+});
+
+
+ </script>
+</head>
+
+<body ng-app="myApp1" ng-controller="FormController1">
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Top Header Area -->
+        <div class="top-header-area">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 d-flex justify-content-between">
+                        <!-- Logo Area -->
+                        <div class="logo">
+                            <a href="index.html"><h1>Acme Financial</h1></a>
+
+                        </div>
+
+                        <!-- Top Contact Info -->
+                        <div class="top-contact-info d-flex align-items-center">
+                            <b> <a href="#" data-toggle="tooltip" data-placement="bottom" title="office@yourfirm.com"> <span>Agent Login</span></a></b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="credit-main-menu" id="sticker">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="creditNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="#">Pages</a>
+                                        <ul class="dropdown">
+                                            <li><a href="#">Home</a></li>
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Services</a></li>
+                                            <li><a href="#">Post</a></li>
+                                            <li><a href="#">Single Post</a></li>
+                                            <li><a ng-click="eventStream()">Contact</a></li>
+                                            <li><a href="elements.html">Elements</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Services</a></li>
+
+                                    <li><a href="#">Blog</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="contact">
+                            <a href="#"><img src="img/core-img/call2.png" alt=""> +222 222 2222</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/13.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2>Customer Profile</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Customer Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Contact Area Start ##### -->
+    <section class="contact-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
+                <!-- Single Contact Area -->
+
+
+                <!-- Single Contact Area -->
+                <div class="col-12 col-lg-4">
+                    <div class="single-contact-area mb-100">
+                        <div class="contact-advisor">
+                            <h5>Customer</h5>
+                            <h6>John Holt</h6>
+                            <!-- Single Advisor -->
+                            <div class="single-advisor d-flex align-items-center">
+                                <div class="advisor-img">
+                                    <img src="img/user.jpeg" alt="">
+                                </div>
+                                <div>
+
+                                    <div class="text">
+                                        <p>43 Nowwhere <br> USA<br/>222-222-2222</p>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- Single Advisor -->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4" ng-init="offerstream()">
+                    <div class="single-contact-area mb-100">
+                        <div class="contact--area contact-page">
+                            <!-- Contact Content -->
+                            <div class="contact-content">
+                                <h5>Last Interaction</h5>
+
+                                <div data-animation="fadeInUp" >
+                                    <h6 >24th April, 2019</h6>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Single Contact Area -->
+                <div class="col-12 col-lg-4" ng-init="offerstream()">
+                    <div class="single-contact-area mb-100">
+                        <div class="contact--area contact-page">
+                            <!-- Contact Content -->
+                            <div class="contact-content">
+                                <h5>Offers</h5>
+
+                                <div data-animation="fadeInUp" ng-repeat="of in off track by $index">
+                                    <h6 >{{of.eventResponsePayload}}</h6>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-init="eventstream()">
+
+                    <!-- Contact Content -->
+            <section  >
+
+                <div class="container h-100 align-items-center">
+                    <div class="contact-advisor">
+                        <h5>Event Stream</h5>
+
+                        <div style="overflow: auto; min-height: 1px; max-height: 200px;">
+                            <p><table border="1" width="100%">
+                                <tr><td>Event</td><td>Event Value</td><td>Channel</td>
+                                <tr ng-repeat="off in events track by $index" >
+                                    <td>{{off.eventCategory}}</td>
+                                    <td>{{off.eventValue}}</td>
+                                    <td>{{off.eventSource}}</td>
+
+                            </table></p>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            </div>
+        </div>
+
+
+        <!-- Copywrite Area -->
+        <div class="copywrite-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="copywrite-content d-flex flex-wrap justify-content-between align-items-center">
+                            <!-- Footer Logo -->
+                            <!-- Copywrite Text -->
+                            <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+</body>
+
+</html>
