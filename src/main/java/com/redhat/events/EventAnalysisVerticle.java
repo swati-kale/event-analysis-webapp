@@ -145,7 +145,7 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         router.route("/static/*").handler(StaticHandler.create("assets"));
 
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", 8087), result -> {
+        vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", 8080), result -> {
             if (result.succeeded()) {
                 fut.complete();
             } else {
