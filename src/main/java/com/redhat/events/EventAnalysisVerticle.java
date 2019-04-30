@@ -56,12 +56,12 @@ public class EventAnalysisVerticle extends AbstractVerticle {
            
             Map<String, Object> value = new Gson().fromJson(record.value(),Map.class);
 
- System.out.println(value);
+ 
 
                     event = new Gson().fromJson(new Gson().toJson(value), com.Event.class);
 
 
-            System.out.print(event);
+            System.out.print("Event"+ event);
             if(null != event && null != event.getEventCategory()) {
                 customer1EventList.add(event);
 
