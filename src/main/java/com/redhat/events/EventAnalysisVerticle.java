@@ -53,6 +53,7 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         KafkaConsumer<String, String> customerEvents = getKafkaConsumerCustomerEvents(config,vertx);
 
         customerEvents.handler(record -> {
+            System.out.println(record.value());
             Map<String, Object> value = new Gson().fromJson(record.value(),Map.class);
 
 
