@@ -35,4 +35,12 @@ public class AlertMapObj {
 
         return Objects.hash(getUserId());
     }
+
+    @Override
+    public String toString() {
+        return "AlertMapObj{" +
+                "userId='" + userId + '\'' +
+                ", noOfAttempts='" + noOfAttempts + '\'' +
+                '}';
+    }
 }

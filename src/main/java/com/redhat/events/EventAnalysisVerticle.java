@@ -134,6 +134,9 @@ public class EventAnalysisVerticle extends AbstractVerticle {
 
         });
 
+        System.out.println("Alert Map:"+alertMap);
+
+
     }
 
     @Override
