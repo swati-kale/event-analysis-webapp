@@ -33,6 +33,8 @@ public class EventAnalysisVerticle extends AbstractVerticle {
     private Set<eventAnalysis> paymentsHome = new HashSet<>();
 
     private List<Event> customer1EventList = new ArrayList<>();
+    private Set<AlertMapObj> alertMap = new HashSet<>();
+
 
 
     private Event event;
@@ -118,6 +120,19 @@ public class EventAnalysisVerticle extends AbstractVerticle {
 
 
         });
+
+        KafkaConsumer<String, String> atmEvents = getFraudPatternStream(config,vertx);
+        alertMap = new HashSet<>();
+
+        atmEvents.handler(record -> {
+           AlertMapObj  alertMapObj = new AlertMapObj();
+           alertMapObj.setUserId(record.key().replaceAll("\"",""));
+
+           alertMapObj.setNoOfAttempts(record.value());
+           alertMap.add(alertMapObj);
+
+        });
+
     }
 
     @Override
@@ -140,6 +155,8 @@ public class EventAnalysisVerticle extends AbstractVerticle {
 
         router.post("/eventStream").handler(this::eventStream);
 
+        router.post("/alertMap").handler(this::alertMap);
+
 
 
         router.route("/static/*").handler(StaticHandler.create("assets"));
@@ -154,6 +171,9 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         });
     }
 
+
+
+
     private void postHome(RoutingContext routingContext) {
 
 
@@ -162,6 +182,20 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         if(null != offersHome && !offersHome.isEmpty()) {
             routingContext.response().setStatusCode(201).putHeader("content-type", "application/json")
                     .end(Json.encodePrettily(new Gson().toJson(offersHome)));
+        }
+
+
+
+    }
+
+    private void alertMap(RoutingContext routingContext) {
+
+
+
+
+        if(null != alertMap && !alertMap.isEmpty()) {
+            routingContext.response().setStatusCode(201).putHeader("content-type", "application/json")
+                    .end(Json.encodePrettily(new Gson().toJson(alertMap)));
         }
 
 
@@ -225,6 +259,18 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         // subscribe to several topics
         Set<String> topics = new HashSet<>();
         topics.add("event-input-stream");
+
+        consumer.subscribe(topics);
+        return consumer;
+    }
+
+    private static KafkaConsumer<String, String> getFraudPatternStream(Properties config, Vertx vertx) {
+        KafkaConsumer<String, String> consumer = KafkaConsumer.create(vertx, config);
+
+
+        // subscribe to several topics
+        Set<String> topics = new HashSet<>();
+        topics.add("ATM_Response");
 
         consumer.subscribe(topics);
         return consumer;

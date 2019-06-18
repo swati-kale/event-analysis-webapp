@@ -22,6 +22,25 @@
 var app = angular.module('myApp1', []);
 app.controller('FormController1', function($scope,$http) {
 
+$scope.alertStream = function() {
+
+
+$http({
+        url: 'http://localhost:8087/alertMap',
+        method: "POST"
+
+    })
+    .then(function(response) {
+
+           $scope.alerts = JSON.parse(response.data);
+
+    },
+    function(response) { // optional
+            // failed
+            console.log (JSON.stringify (response, null, 2));
+
+    });
+    }
 
 $scope.eventstream = function() {
 
@@ -212,17 +231,32 @@ $http({
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4" ng-init="offerstream()">
+                <div class="col-12 col-lg-4" ng-init="alertStream()">
                     <div class="single-contact-area mb-100">
                         <div class="contact--area contact-page">
                             <!-- Contact Content -->
-                            <div class="contact-content">
-                                <h5>Last Interaction</h5>
+                            <div class="contact-advisor">
+                                <h5>Alerts</h5>
 
-                                <div data-animation="fadeInUp" >
-                                    <h6 >24th April, 2019</h6>
 
+                                <div style="overflow: auto; min-height: 1px; max-height: 200px;">
+                                    <p>
+                                    Possible fraudulent transactions
+                                        <br/>
+                                    No of ATM Withdrawal attempts in 2 Mins:
+                                    <br/>
+                                    <table border="1" width="100%">
+                                    <tr><td>UserId</td><td>No of Attempts</td>
+                                    <tr ng-repeat="alert in alerts track by $index" >
+                                        <td>{{alert.userId}}</td>
+                                        <td>{{alert.noOfAttempts}}</td>
+
+
+                                </table></p>
+                                    <br/>
+                                    <br/>
                                 </div>
+
 
 
                             </div>
