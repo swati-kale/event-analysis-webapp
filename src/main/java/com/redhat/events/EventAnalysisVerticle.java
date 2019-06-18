@@ -122,19 +122,7 @@ public class EventAnalysisVerticle extends AbstractVerticle {
 
         });
 
-        KafkaConsumer<String, String> atmEvents = getFraudPatternStream(config,vertx);
-        alertMap = new HashSet<>();
 
-        atmEvents.handler(record -> {
-           AlertMapObj  alertMapObj = new AlertMapObj();
-           alertMapObj.setUserId(record.key().replaceAll("\"",""));
-
-           alertMapObj.setNoOfAttempts(record.value());
-           alertMap.add(alertMapObj);
-
-        });
-
-        System.out.println("Alert Map:"+alertMap);
 
 
     }
@@ -193,8 +181,29 @@ public class EventAnalysisVerticle extends AbstractVerticle {
     }
 
     private void alertMap(RoutingContext routingContext) {
+        Properties config = new Properties();
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-cluster-kafka-brokers:9092");
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
+        config.put("key.serializer", StringSerializer.class);
+        config.put("value.serializer", StringSerializer.class);
+        config.put("group.id", "another_grp");
+        config.put("auto.offset.reset", "earliest");
+        config.put("enable.auto.commit", "false");
+        KafkaConsumer<String, String> atmEvents = getFraudPatternStream(config,vertx);
+        alertMap = new HashSet<>();
 
+        atmEvents.handler(record -> {
+            AlertMapObj  alertMapObj = new AlertMapObj();
+            alertMapObj.setUserId(record.key().replaceAll("\"",""));
+
+            alertMapObj.setNoOfAttempts(record.value());
+            alertMap.add(alertMapObj);
+
+        });
+
+        System.out.println("Alert Map:"+alertMap);
 
 
         if(null != alertMap && !alertMap.isEmpty()) {
