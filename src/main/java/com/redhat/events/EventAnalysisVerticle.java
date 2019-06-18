@@ -42,7 +42,7 @@ public class EventAnalysisVerticle extends AbstractVerticle {
 
     private void init() {
         Properties config = new Properties();
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "my-cluster-kafka-brokers:9092");
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 
@@ -55,14 +55,15 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         KafkaConsumer<String, String> customerEvents = getKafkaConsumerCustomerEvents(config,vertx);
 
         customerEvents.handler(record -> {
+           
             Map<String, Object> value = new Gson().fromJson(record.value(),Map.class);
 
-
+ 
 
                     event = new Gson().fromJson(new Gson().toJson(value), com.Event.class);
 
 
-            System.out.print(event);
+            System.out.print("Event"+ event);
             if(null != event && null != event.getEventCategory()) {
                 customer1EventList.add(event);
 
@@ -162,7 +163,7 @@ public class EventAnalysisVerticle extends AbstractVerticle {
         router.route("/static/*").handler(StaticHandler.create("assets"));
 
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", 8087), result -> {
+        vertx.createHttpServer().requestHandler(router::accept).listen(config().getInteger("http.port", 8080), result -> {
             if (result.succeeded()) {
                 fut.complete();
             } else {

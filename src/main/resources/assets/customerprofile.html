@@ -46,7 +46,7 @@ $scope.eventstream = function() {
 
 
 $http({
-        url: 'http://localhost:8087/eventStream',
+        url: 'http://event-analysis-webapp-kafka.192.168.99.100.nip.io/eventStream',
         method: "POST"
 
     })
@@ -65,7 +65,7 @@ $http({
 
 
 $http({
-        url: 'http://localhost:8087/offerStream',
+        url: 'http://event-analysis-webapp-kafka.192.168.99.100.nip.io/offerStream',
         method: "POST"
 
     })
@@ -234,7 +234,7 @@ $http({
                 <div class="col-12 col-lg-4" ng-init="alertStream()">
                     <div class="single-contact-area mb-100">
                         <div class="contact--area contact-page">
-                            <!-- Contact Content -->
+
                             <div class="contact-advisor">
                                 <h5>Alerts</h5>
 
@@ -255,6 +255,8 @@ $http({
                                 </table></p>
                                     <br/>
                                     <br/>
+
+
                                 </div>
 
 
@@ -345,6 +347,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    </section>
 </body>
 
 </html>
