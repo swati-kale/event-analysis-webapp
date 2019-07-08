@@ -7,7 +7,7 @@
   <artifactId>event-analysis-web</artifactId>
   <version>1.0.0</version>
    <properties>
-		<NEXUSREPO>http://nexus-nexus.apps.florida-e455.openshiftworkshop.com</NEXUSREPO>
+		<NEXUSREPO>localhost</NEXUSREPO>
 	</properties>
 
   <dependencies>
@@ -98,7 +98,7 @@
     <repository>
       <id>maven-DM</id>
       <name>maven-DM</name>
-      <url>${env.NEXUSREPO}/repository/maven-DM/</url>
+      <url>http://nexus-nexus.apps.florida-e455.openshiftworkshop.com/repository/maven-DM/</url>
     </repository>
   </repositories>
 
